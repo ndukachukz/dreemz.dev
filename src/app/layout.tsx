@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Syne, Poppins } from "next/font/google";
 import "./globals.css";
+import { twMerge } from "tailwind-merge";
+import { Footer, Navbar } from "~/components";
 
-const inter = Inter({ subsets: ["latin"] });
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+});
+
+const poppins = Poppins({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={twMerge(poppins.variable, syne.variable)}>
+      <body>
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
